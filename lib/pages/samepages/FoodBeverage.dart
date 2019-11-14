@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:golotlo/pages/ProductPageWidget.dart';
 
 class FoodBev extends StatefulWidget {
   @override
@@ -8,14 +9,19 @@ class FoodBev extends StatefulWidget {
 class _FoodBevState extends State<FoodBev> {
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1,
-        leading: Icon(
-          Icons.arrow_back_ios,
-          color: Colors.blue[700],
+        leading: InkWell(
+          onTap: () => Navigator.of(context).pop(),
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.blue[700],
+          ),
         ),
         title: Text(
           "الأغذية والمشروبات",
@@ -27,11 +33,11 @@ class _FoodBevState extends State<FoodBev> {
         child: ListView.builder(
             shrinkWrap: true,
             primary: false,
-            itemCount: 13,
+            itemCount: 4,
             itemBuilder: (context, i) {
               return InkWell(
                 onTap: () {},
-                child: cardd(context),
+                child: cardd(context, height, width),
               );
             }),
       ),
@@ -39,9 +45,9 @@ class _FoodBevState extends State<FoodBev> {
   }
 }
 
-Widget cardd(context) {
+Widget cardd(context, h, w) {
   return Padding(
-    padding: const EdgeInsets.all(15.0),
+    padding: const EdgeInsets.all(5.0),
     child: Card(
         semanticContainer: true,
         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -51,9 +57,9 @@ Widget cardd(context) {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.only(top: 5.0, left: 10, right: 10),
               child: Container(
-                height: MediaQuery.of(context).size.height / 4,
+                height: h / 5,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20.0),
@@ -67,36 +73,7 @@ Widget cardd(context) {
                 ),
                 child: Stack(
                   children: <Widget>[
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(50.0),
-                          ),
-                        ),
-                        child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 5,
-                              right: 5,
-                            ),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width / 2,
-                              child: Text(
-                                "اشتري 1 خد 1",
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue),
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            )),
-                      ),
-                    )
+                    promo2(context, 18, 2, 6.4),
                   ],
                 ),
               ),
@@ -163,7 +140,7 @@ Widget cardd(context) {
               ],
             ),
             SizedBox(
-              height: 12,
+              height: h / 55,
             ),
           ],
         )),

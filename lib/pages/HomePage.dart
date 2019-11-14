@@ -1,4 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:golotlo/pages/ProductPageWidget.dart';
+import 'package:golotlo/pages/samepages/FoodBeverage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -6,21 +9,40 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _current = 0;
+  List malist = [
+    'http://pic3.16pic.com/00/55/42/16pic_5542988_b.jpg',
+    'http://photo.16pic.com/00/38/88/16pic_3888084_b.jpg',
+    'http://pic3.16pic.com/00/55/42/16pic_5542988_b.jpg',
+    'http://photo.16pic.com/00/38/88/16pic_3888084_b.jpg',
+  ];
+  List maimg = [
+    'http://www.textures4photoshop.com/tex/thumbs/restaurant-food-frame-with-rustic-wood-background-free-93.jpg',
+    'https://www.lsretail.com/hubfs/Main%20banner%20top/leisure-and-entertainment-industry-main-head-3.jpg',
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+    'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190828-index-walmart-toys-1567004787.png?crop=1.00xw:1.00xh;0,0&resize=1200:*'
+  ];
+  List tt = ["الأكل و الشراب", 'الالكترونيات', 'المتعة والترفيه', 'الألعاب'];
+  int indexx;
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height / 9),
+        preferredSize: Size.fromHeight(height / 9),
         child: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
           leading: Padding(
             padding: const EdgeInsets.only(top: 10, left: 20),
-            child: Icon(
-              Icons.g_translate,
-              size: 42,
-              color: Colors.blue,
+            child: InkWell(
+              onTap: () => Navigator.of(context).pop(),
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.blue[700],
+              ),
             ),
           ),
           title: Padding(
@@ -50,52 +72,51 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: <Widget>[
               Container(
-                height: 100,
+                height: height / 7.5,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Card(
-                        semanticContainer: true,
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                    return Card(
+                      semanticContainer: true,
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Container(
+                        width: width / 2.7,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(maimg[index]),
+                            fit: BoxFit.fill,
+                          ),
                         ),
                         child: Container(
-                          width: 120,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  "http://www.textures4photoshop.com/tex/thumbs/restaurant-food-frame-with-rustic-wood-background-free-93.jpg"),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          child: Container(
-                            alignment: Alignment.bottomCenter,
-                            padding: EdgeInsets.all(10),
-                            child: Text(
-                              "Food & beverages",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                          alignment: Alignment.bottomRight,
+                          padding: EdgeInsets.only(right: 10),
+                          child: Text(
+                            tt[index],
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
+                            textDirection: TextDirection.rtl,
                           ),
                         ),
                       ),
                     );
                     // );
                   },
-                  itemCount: 6, // this is a hardcoded value
+                  itemCount: 4, // this is a hardcoded value
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: height / 40,
               ),
               CarouselSlider(
-                height: 200.0,
+                height: height / 3.7,
                 enableInfiniteScroll: false,
+                autoPlay: true,
+                enlargeCenterPage: true,
                 initialPage: 0,
                 onPageChanged: (i) {
                   setState(() {
@@ -106,29 +127,22 @@ class _HomePageState extends State<HomePage> {
                 items: malist.map((i) {
                   return Builder(
                     builder: (BuildContext context) {
-                      return Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(horizontal: 5.0),
-                          child: GestureDetector(
-                              child: Image.network(i, fit: BoxFit.fill),
-                              onTap: () {
-                                // Navigator.push<Widget>(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => ImageScreen(i),
-                                //   ),
-                                // );
-                              }));
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: Container(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: height / 300),
+                            child: GestureDetector(
+                                child: Image.network(i, fit: BoxFit.fill),
+                                onTap: () {})),
+                      );
                     },
                   );
                 }).toList(),
               ),
-              SizedBox(
-                height: 5,
-              ),
               Container(
                 width: double.infinity,
-                height: 50,
+                height: height / 20,
                 padding: EdgeInsets.only(
                     left: MediaQuery.of(context).size.width / 2.3),
                 child: ListView.builder(
@@ -148,12 +162,9 @@ class _HomePageState extends State<HomePage> {
                       );
                     }),
               ),
-              SizedBox(
-                height: 20,
-              ),
               Container(
                 width: double.infinity,
-                // color: Colors.black12,
+                height: height / 14,
                 padding: EdgeInsets.only(right: 20),
                 child: Text(
                   "اختياراتنا لك",
@@ -166,29 +177,13 @@ class _HomePageState extends State<HomePage> {
                   textDirection: TextDirection.rtl,
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
               Container(
-                height: 250,
-                color: Colors.black,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(5.0),
-                              child: minicardd(context),
-                    );
-                  },
-                  itemCount: 6, // this is a hardcoded value
-                ),
-              ),
-              SizedBox(
-                height: 20,
+                height: height / 3.5,
+                child: minicardd(context, height, width),
               ),
               Container(
                 width: double.infinity,
-                // color: Colors.black12,
+                height: height / 17,
                 padding: EdgeInsets.only(right: 20),
                 child: Text(
                   "تخفيضات بالقرب منك",
@@ -201,27 +196,45 @@ class _HomePageState extends State<HomePage> {
                   textDirection: TextDirection.rtl,
                 ),
               ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  primary: false,
-                  itemCount: 13,
-                  itemBuilder: (context, i) {
-                    return InkWell(
-                      onTap: () {},
-                      child: cardd(context),
-                    );
-                  }),
+              Container(
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: 13,
+                    itemBuilder: (context, i) {
+                      return InkWell(
+                        onTap: () {},
+                        child: cardd(context, height, width),
+                      );
+                    }),
+              ),
             ],
           ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Pick Image',
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: height / 100,
+            ),
+            Icon(Icons.add_a_photo),
+            Text(
+              "Scan",
+              style: TextStyle(fontSize: 14),
+            )
+          ],
         ),
       ),
     );
   }
 }
 
-Widget cardd(context) {
+Widget cardd(context, h, w) {
   return Padding(
-    padding: const EdgeInsets.all(15.0),
+    padding: const EdgeInsets.symmetric(horizontal: 15),
     child: Card(
         semanticContainer: true,
         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -233,7 +246,7 @@ Widget cardd(context) {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Container(
-                height: MediaQuery.of(context).size.height / 4,
+                height: h / 5,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20.0),
@@ -247,36 +260,7 @@ Widget cardd(context) {
                 ),
                 child: Stack(
                   children: <Widget>[
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(50.0),
-                          ),
-                        ),
-                        child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 5,
-                              right: 5,
-                            ),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width / 2,
-                              child: Text(
-                                "خصم %30  ",
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue),
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            )),
-                      ),
-                    )
+                    promo2(context, 18, 2, 6.5, txt: "خصم %30"),
                   ],
                 ),
               ),
@@ -303,10 +287,6 @@ Widget cardd(context) {
                         ],
                       )),
                 ),
-
-                // SizedBox(
-                //   width: MediaQuery.of(context).size.width / 8,
-                // ),
                 Column(
                   children: <Widget>[
                     Text(
@@ -349,4 +329,84 @@ Widget cardd(context) {
         )),
   );
 }
+
+Widget minicardd(context, h, w) {
+  return ListView.builder(
+    scrollDirection: Axis.horizontal,
+    itemBuilder: (context, index) {
+      return Card(
+        elevation: 2,
+        semanticContainer: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            Container(
+              height: h / 6,
+              width: w / 1.4,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20.0),
+                    topRight: Radius.circular(20.0)),
+                image: DecorationImage(
+                  image: NetworkImage(
+                    "https://assets3.thrillist.com/v1/image/2797371/size/tmg-article_default_mobile.jpg",
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Stack(
+                children: <Widget>[
+                  promo2(context, 18, 2, 8.3, txt: "خصم %30"),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Text(
+                      "برغر كينغ",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "الأغذية والمشروبات",
+                      style: TextStyle(
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15.0, right: 20),
+                  child: Container(
+                    width: w / 10,
+                    height: h / 10,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Image.network(
+                        "https://i.pinimg.com/originals/96/0a/be/960abef4528685a8daffe3c4221594f2.png",
+                        width: 50,
+                        height: 50,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+      // );
+    },
+    itemCount: 6, // this is a hardcoded value
+  );
 }

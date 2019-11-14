@@ -2,27 +2,57 @@ import 'package:flutter/material.dart';
 
 Widget promo(context, x, y) {
   return Positioned(
-    bottom: 0,
+    top: MediaQuery.of(context).size.height / 4.4,
     right: 0,
     child: Container(
       height: MediaQuery.of(context).size.height / x,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30.0),
+          topLeft: Radius.circular(50.0),
+          bottomLeft: Radius.circular(50.0),
         ),
       ),
       child: Padding(
-          padding: const EdgeInsets.only(
-            left: 30,
-            right: 30,
-          ),
+          padding: const EdgeInsets.only(left: 30, right: 10),
           child: LimitedBox(
             maxWidth: MediaQuery.of(context).size.width / y,
             child: Text(
               "اشتري 1 خد 1",
               style: TextStyle(
-                  fontSize: 36,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue),
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              textDirection: TextDirection.rtl,
+            ),
+          )),
+    ),
+  );
+}
+
+Widget promo2(context, x, y, w, {String txt = "اشتري 1 خد 1"}) {
+  return Positioned(
+    top: MediaQuery.of(context).size.height / w,
+    right: 0,
+    child: Container(
+      height: MediaQuery.of(context).size.height / x,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50.0),
+          bottomLeft: Radius.circular(50.0),
+        ),
+      ),
+      child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 10),
+          child: LimitedBox(
+            maxWidth: MediaQuery.of(context).size.width / y,
+            child: Text(
+              txt,
+              style: TextStyle(
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                   color: Colors.blue),
               textAlign: TextAlign.center,
@@ -36,7 +66,7 @@ Widget promo(context, x, y) {
 
 Widget cardd(context) {
   return Padding(
-    padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+    padding: const EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
     child: Card(
         semanticContainer: true,
         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -44,7 +74,7 @@ Widget cardd(context) {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(left: 25.0, right: 25, top: 10),
+          padding: const EdgeInsets.only(right: 15, top: 2),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -54,7 +84,7 @@ Widget cardd(context) {
                 child: Text(
                   "عرض خاص بيتزا هات",
                   style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.blue),
                   overflow: TextOverflow.ellipsis,
@@ -63,14 +93,14 @@ Widget cardd(context) {
               ),
               Container(
                 width: 250,
-                height: 55,
+                // height: 55,
                 alignment: Alignment.bottomRight,
                 child: LimitedBox(
                   maxHeight: 60,
                   child: Text(
                     "بيتزا و البطاطس مقلية و كوكاكولا ",
                     style: TextStyle(
-                        fontSize: 20, color: Colors.black, height: 1.2),
+                        fontSize: 16, color: Colors.black, height: 1.2),
                     textDirection: TextDirection.rtl,
                     overflow: TextOverflow.clip,
                   ),
@@ -86,7 +116,7 @@ Widget bottomButtom() {
   return MaterialButton(
     // elevation: 0,
     minWidth: double.infinity,
-    padding: EdgeInsets.all(20),
+    padding: EdgeInsets.all(14),
     color: Color(0xFF2196f3),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
     child: Row(
@@ -107,12 +137,7 @@ Widget bottomButtom() {
         ),
         SizedBox(
           width: 20,
-        ),
-        Icon(
-          Icons.keyboard_tab,
-          color: Colors.white,
-          size: 30,
-        ),
+        )
       ],
     ),
     onPressed: () {},
@@ -173,19 +198,19 @@ Widget review() {
 
 Widget infoo(iconn, txt, subtxt, boul) {
   return Padding(
-      padding: EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(4.0),
       child: Column(
         children: <Widget>[
           ListTile(
             trailing: Icon(
               iconn,
               color: Color(0xFF2196f3),
-              size: 30,
+              size: 22,
             ),
             title: Text(
               txt,
               style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 16,
                   color: Colors.black,
                   fontWeight: FontWeight.bold),
               textDirection: TextDirection.rtl,
@@ -194,13 +219,13 @@ Widget infoo(iconn, txt, subtxt, boul) {
             subtitle: Text(
               subtxt,
               style: TextStyle(
-                  fontSize: 20, color: Color(0xFF2196f3), height: 1.2),
+                  fontSize: 14, color: Color(0xFF2196f3), height: 1.2),
               textDirection: TextDirection.rtl,
               overflow: TextOverflow.clip,
             ),
             leading: Icon(
               Icons.chevron_left,
-              size: 40,
+              size: 30,
               color: Color(0xFF2196f3),
             ),
           ),

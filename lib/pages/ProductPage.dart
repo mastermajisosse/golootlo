@@ -15,13 +15,16 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: ListView(
           // physics: PageScrollPhysics(),
           children: <Widget>[
             Container(
-              height: MediaQuery.of(context).size.height / 2.7,
+              // هنا تغيير حجم الصورة كلما نقص الرقم كانت الصورة اكبر
+              height: height / 3.7,
               decoration: BoxDecoration(
                 color: Colors.blue,
                 image: DecorationImage(
@@ -33,7 +36,19 @@ class _ProductPageState extends State<ProductPage> {
               ),
               child: Stack(
                 children: <Widget>[
-                  promo(context, 12, 1.5),
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: InkWell(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                        size: 24,
+                      ),
+                    ),
+                  ),
+                  // ال 18 هي طول الشريط الأبيض و 2 هي عرضه
+                  promo(context, 17, 2),
                 ],
               ),
             ),
@@ -57,7 +72,7 @@ class _ProductPageState extends State<ProductPage> {
                               "2.56",
                               style: TextStyle(
                                   color: Colors.black87,
-                                  fontSize: 20,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -66,20 +81,24 @@ class _ProductPageState extends State<ProductPage> {
                             "km",
                             style: TextStyle(
                                 color: Colors.black87,
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold),
                             overflow: TextOverflow.ellipsis,
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 5),
-                            child: Icon(Icons.add_location),
+                            padding: const EdgeInsets.only(left: 2),
+                            child: Icon(
+                              Icons.add_location,
+                              size: 18,
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
+                  // هنا تبديل الحجم بين و ما يوجد تحتها
                   SizedBox(
-                    height: 100,
+                    height: height / 8,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -88,7 +107,8 @@ class _ProductPageState extends State<ProductPage> {
                         "بيتزا هوت",
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 20,
+                            // هنا تبديل حجم من 18 الى ما تريد
+                            fontSize: 18,
                             fontWeight: FontWeight.bold),
                       ),
                       Row(
@@ -96,22 +116,27 @@ class _ProductPageState extends State<ProductPage> {
                           Icon(
                             Icons.star,
                             color: Colors.orange,
+                            size: 16,
                           ),
                           Icon(
                             Icons.star,
                             color: Colors.orange,
+                            size: 16,
                           ),
                           Icon(
                             Icons.star,
                             color: Colors.orange,
+                            size: 16,
                           ),
                           Icon(
                             Icons.star,
                             color: Colors.orange,
+                            size: 16,
                           ),
                           Icon(
                             Icons.star,
                             color: Colors.orange,
+                            size: 16,
                           ),
                         ],
                       ),
@@ -126,14 +151,14 @@ class _ProductPageState extends State<ProductPage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 15.0, right: 20),
                     child: Container(
-                      width: 50,
-                      height: 50,
+                      width: 40,
+                      height: 40,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.circular(40),
                         child: Image.network(
                           "https://i.pinimg.com/originals/96/0a/be/960abef4528685a8daffe3c4221594f2.png",
-                          width: 50,
-                          height: 50,
+                          width: 40,
+                          height: 40,
                         ),
                       ),
                     ),
@@ -144,17 +169,14 @@ class _ProductPageState extends State<ProductPage> {
             Column(
               children: <Widget>[
                 Container(
-                  height: MediaQuery.of(context).size.height / 3.5,
+                  height: height / 5.5,
                   color: Colors.grey[100],
                   child:
                       // cardd(context),
                       ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: cardd(context),
-                      );
+                      return cardd(context);
                     },
                     itemCount: 6, // this is a hardcoded value
                   ),
@@ -164,7 +186,7 @@ class _ProductPageState extends State<ProductPage> {
             Column(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   child: Container(
                     color: Colors.white,
                     child: Row(
@@ -175,7 +197,9 @@ class _ProductPageState extends State<ProductPage> {
 
                           child: MaterialButton(
                             elevation: 0,
-                            padding: EdgeInsets.all(20),
+                            // هنا التقييم بدل 2 الى ما تريد
+
+                            padding: EdgeInsets.all(2),
                             color: isActive ? Colors.white : Color(0xFF2196f3),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
@@ -183,7 +207,7 @@ class _ProductPageState extends State<ProductPage> {
                               'تقييم',
                               style: TextStyle(
                                   color: isActive ? Colors.black : Colors.white,
-                                  fontSize: 18,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
@@ -199,7 +223,8 @@ class _ProductPageState extends State<ProductPage> {
                           flex: 1,
                           child: MaterialButton(
                             elevation: 0,
-                            padding: EdgeInsets.all(20),
+                            // هنا التفاصيل بدل 2 الى ما تريد
+                            padding: EdgeInsets.all(2),
                             color: isActive ? Color(0xFF2196f3) : Colors.white,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
@@ -207,7 +232,7 @@ class _ProductPageState extends State<ProductPage> {
                               'التفاصيل',
                               style: TextStyle(
                                   color: isActive ? Colors.white : Colors.black,
-                                  fontSize: 18,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),

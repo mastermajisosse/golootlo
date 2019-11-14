@@ -27,10 +27,12 @@ class _EnterNumState extends State<EnterNum> {
               width: double.infinity,
               alignment: Alignment.topLeft,
               padding: EdgeInsets.all(20),
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-                size: 50,
+              child: InkWell(
+                onTap: () => Navigator.of(context).pop(),
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.blue[700],
+                ),
               ),
             ),
           ),

@@ -74,6 +74,70 @@ class _LocationState extends State<Location> {
               markers: _marker,
               onCameraMove: _onCameraMove,
             ),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0, left: 15),
+              child: InkWell(
+                onTap: () => Navigator.of(context).pop(),
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.blue[700],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 60, left: 10, right: 10),
+              child: Container(
+                alignment: Alignment.topCenter,
+                child: Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: TextField(
+                    style: TextStyle(fontSize: 20, height: 1),
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      disabledBorder: InputBorder.none,
+                      filled: true,
+                      labelText: " بحت ..",
+                      hintText: " بحت ..",
+                      prefixIcon: Icon(Icons.search),
+                      border: UnderlineInputBorder(
+                        borderSide: new BorderSide(color: Colors.white),
+                        borderRadius: new BorderRadius.circular(100),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 18.0, right: 18, bottom: 20),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: MaterialButton(
+                  // elevation: 0,
+                  minWidth: double.infinity,
+                  padding: EdgeInsets.all(20),
+                  color: Color(0xFF2196f3),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'تاكيد',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            height: 1),
+                        textAlign: TextAlign.center,
+                      )
+                    ],
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ),
             // Padding(
             //   padding: EdgeInsets.all(16),
             //   child: Align(

@@ -10,9 +10,12 @@ class ChatTabScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 6,
-        leading: Icon(
-          Icons.arrow_back_ios,
-          color: Color(0xFF2196f3),
+        leading: InkWell(
+          onTap: () => Navigator.of(context).pop(),
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.blue[700],
+          ),
         ),
         title: Text(
           "المحادتات",

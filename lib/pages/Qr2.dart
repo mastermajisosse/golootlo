@@ -1,16 +1,17 @@
 // import 'dart:async';
+// import 'dart:typed_data';
 
-// import 'package:barcode_scan/barcode_scan.dart';
 // import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
+// import 'package:qrscan/qrscan.dart' as scanner;
 
-// class ScanScreen extends StatefulWidget {
+// class MaQr extends StatefulWidget {
 //   @override
-//   _ScanState createState() => new _ScanState();
+//   _MaQrState createState() => _MaQrState();
 // }
 
-// class _ScanState extends State<ScanScreen> {
-//   String barcode = "";
+// class _MaQrState extends State<MaQr> {
+//   String barcode = '';
+//   Uint8List bytes = Uint8List(200);
 
 //   @override
 //   initState() {
@@ -20,51 +21,43 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
-//         appBar: new AppBar(
-//           title: new Text('QR Code Scanner'),
+//       appBar: AppBar(
+//         title: Text('Qrcode Scanner Example'),
+//       ),
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.end,
+//           crossAxisAlignment: CrossAxisAlignment.center,
+//           children: <Widget>[
+//             SizedBox(
+//               width: 200,
+//               height: 200,
+//               child: Image.memory(bytes),
+//             ),
+//             Text('RESULT  $barcode'),
+//             RaisedButton(onPressed: _scan, child: Text("Scan")),
+//             RaisedButton(onPressed: _scanPhoto, child: Text("Scan Photo")),
+//             RaisedButton(
+//                 onPressed: _generateBarCode, child: Text("Generate Barcode")),
+//           ],
 //         ),
-//         body: new Center(
-//           child: new Column(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             crossAxisAlignment: CrossAxisAlignment.stretch,
-//             children: <Widget>[
-//               Padding(
-//                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-//                 child: RaisedButton(
-//                     color: Colors.blue,
-//                     textColor: Colors.white,
-//                     splashColor: Colors.blueGrey,
-//                     onPressed: scan,
-//                     child: const Text('START CAMERA SCAN')
-//                 ),
-//               )
-//               ,
-//               Padding(
-//                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-//                 child: Text(barcode, textAlign: TextAlign.center,),
-//               )
-//               ,
-//             ],
-//           ),
-//         ));
+//       ),
+//     );
 //   }
 
-//   Future scan() async {
-//     try {
-//       String barcode = await BarcodeScanner.scan();
-//       setState(() => this.barcode = barcode);
-//     } on PlatformException catch (e) {
-//       if (e.code == BarcodeScanner.CameraAccessDenied) {
-//         setState(() {
-//           this.barcode = 'The user did not grant the camera permission!';
-//         });
-//       } else {
-//         setState(() => this.barcode = 'Unknown error: $e');
-//       }
-//     } on FormatException{
-//       setState(() => this.barcode = 'null (User returned using the "back"-button before scanning anything. Result)');
-//     } catch (e) {
-//       setState(() => this.barcode = 'Unknown error: $e');
-//     }
+//   Future _scan() async {
+//     String barcode = await scanner.scan();
+//     setState(() => this.barcode = barcode);
+//   }
+
+//   Future _scanPhoto() async {
+//     String barcode = await scanner.scanPhoto();
+//     setState(() => this.barcode = barcode);
+//   }
+
+//   Future _generateBarCode() async {
+//     Uint8List result = await scanner
+//         .generateBarCode('https://github.com/leyan95/qrcode_scanner');
+//     this.setState(() => this.bytes = result);
 //   }
 // }

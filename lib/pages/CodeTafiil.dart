@@ -13,9 +13,12 @@ class _MyHomeState extends State<MyHome> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 6,
-        leading: Icon(
-          Icons.arrow_back_ios,
-          color: Colors.black,
+        leading: InkWell(
+          onTap: () => Navigator.of(context).pop(),
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.blue[700],
+          ),
         ),
         title: Text(
           "كود التفعيل",

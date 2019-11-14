@@ -10,6 +10,24 @@ class _NumChatState extends State<NumChat> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 6,
+        leading: InkWell(
+          onTap: () => Navigator.of(context).pop(),
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.blue[700],
+          ),
+        ),
+        title: Text(
+          "ارقام",
+          style: TextStyle(
+            color: Color(0xFF2196f3),
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Container(
           child: Column(
@@ -20,8 +38,8 @@ class _NumChatState extends State<NumChat> {
                   textDirection: TextDirection.rtl,
                   child: TextField(
                     decoration: InputDecoration(
-                        labelText: "..بحت",
-                        hintText: "..بحت",
+                        labelText: " بحت ..",
+                        hintText: " بحت ..",
                         prefixIcon: Icon(Icons.search),
                         border: OutlineInputBorder(
                             borderRadius:
